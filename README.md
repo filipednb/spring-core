@@ -50,7 +50,7 @@ He is also responsible for initializing and providing dependencies to child obje
 **How Spring IoC Container works**
 
 
-![drawing](https://docs.google.com/drawings/d/12345/export/png)
+![drawing](beanCreationFlow.png)
 
 **Concept of POJOs and Beans**
 
@@ -72,16 +72,51 @@ There is two different ways of configuring a bean:
 
 **Configuration Metadata - XML File**
 
-Fully configured System
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-![alt_text](images/image1.png "image_tooltip")
-**Ready for **
+    <bean id="product" class="spring.core.xml.config.Product">
+        <constructor-arg name="id" value="A123" />
+        <constructor-arg name="name" value="Notebook" />
+        <constructor-arg name="productDescription" value="Awesome notebook from Acer TM" />
+    </bean>
+
+    <bean id="product2" class="spring.core.xml.config.Product">
+        <constructor-arg name="id" value="B666" />
+        <constructor-arg name="name" value="SmartPhone" />
+        <constructor-arg name="productDescription" value="Very nice Fone" />
+    </bean>
+</beans>
+```
 
 **Configuration Metadata - Java Config**
 
+```java
+package spring.core.java.annotation.config;
 
-![alt_text](images/image2.png "image_tooltip")
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
+public class ArtistConfiguration {
+
+    @Bean
+    public Artist artist() {
+        return new Artist("Filipe", "Tagliacozzi");
+    }
+
+    /*@Bean("AnotherArtist")
+    public Artist artist() {
+        return new Artist("Sebastian", "Doe");
+    }*/
+
+}
+
+```
 
 In annotation configuration of a bean the method name will be the name of the bean inside IoC container or as this: @Bean(name = “nameOfBean”).
 
@@ -96,8 +131,6 @@ In annotation configuration of a bean the method name will be the name of the be
 
 **ApplicationContext Interface**
 
-
-
 *   Central interface to provide configuration for a Spring application
 *   This is read-only while the application is running, but may be reloaded if the implementation support this
 *   Implement various other interfaces that provides useful features, such as:
@@ -108,7 +141,7 @@ In annotation configuration of a bean the method name will be the name of the be
 **Demonstration**
 
 
-![drawing](https://docs.google.com/drawings/d/12345/export/png)
+![drawing](configurationHierarchy.png)
 
 **We can inject that dependency by Constructor or by a Setter method. **
 
