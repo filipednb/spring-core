@@ -1,4 +1,6 @@
-package spring.core.product;
+package spring.core.xml.config;
+
+import java.beans.ConstructorProperties;
 
 public class Product {
 
@@ -6,6 +8,7 @@ public class Product {
     private final String name;
     private final String description;
 
+    @ConstructorProperties({"id", "name", "productDescription"})
     public Product(final String id, final String name, final String description) {
         super();
         this.id = id;

@@ -3,15 +3,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="product" class="spring.core.product.Product">
+    <bean id="product" class="spring.core.xml.config.Product">
         <constructor-arg name="id" value="A123" />
         <constructor-arg name="name" value="Notebook" />
-        <constructor-arg name="description" value="Awesome notebook from Acer TM" />
+        <constructor-arg name="productDescription" value="Awesome notebook from Acer TM" />
     </bean>
 
-    <bean id="product2" class="spring.core.product.Product">
+    <bean id="product2" class="spring.core.xml.config.Product">
         <constructor-arg name="id" value="B666" />
         <constructor-arg name="name" value="SmartPhone" />
-        <constructor-arg name="description" value="Very nice Fone" />
+        <constructor-arg name="productDescription" value="Very nice Fone" />
     </bean>
 </beans>
