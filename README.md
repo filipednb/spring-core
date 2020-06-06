@@ -50,7 +50,7 @@ He is also responsible for initializing and providing dependencies to child obje
 **How Spring IoC Container works**
 
 
-![drawing](beanCreationFlow.png)
+![drawing](src/main/resources/assets/beanCreationFlow.png)
 
 **Concept of POJOs and Beans**
 
@@ -143,7 +143,7 @@ In annotation configuration of a bean the method name will be the name of the be
 **Demonstration**
 
 
-![drawing](configurationHierarchy.png)
+![drawing](src/main/resources/assets/configurationHierarchy.png)
 
 **We can inject that dependency by Constructor or by a Setter method. **
 
@@ -183,7 +183,7 @@ public UserService(UserRepository repository) {
 }         
 
 // 3 - By Setter method
-public void setRepository(UserRepository repository){ // 3 ←
+public void setRepository(UserRepository repository){
     this.repository;
 }
 
