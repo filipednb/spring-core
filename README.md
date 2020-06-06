@@ -3,19 +3,17 @@
 
 “Spring framework is a Java platform that provides comprehensive infrastructure support for developing Java applications. Spring handles the infrastructure so you can focus on your application” 
 
-“O framework Spring é uma plataforma Java que provisiona uma infraestrutura de apoio compreensiva  para o desenvolvimento de aplicações Java. Spring lida com a infraestrutura, então você focar na sua aplicação”
-
 **Introducing objects dependencies**
 
 A Java Application is a collection of Objects. In a good application we will have several objects with their own responsibilities. And those objects can be dependent on each other.
 
 **Example:**
 
-UserService depends on UserRepository UserService -> UserRepository
+UserService depends on UserRepository
 
 So a way to do is like this:
-```java
 
+```java
 public class UserService {
     
     private UserRepository repository;
@@ -30,7 +28,6 @@ public class UserService {
     }
 
 }
-
 ```
 
 **Traditional Way of dependency injection - Drawbacks**
@@ -61,8 +58,6 @@ A POJO cannot implement or extends any other classes that needs a class path.
 When a POJO is inside of a Spring IoC container it is known as Beans.
 
 **Spring IoC Container**
-
-
 
 *   ApplicationContext interface represents the Spring IoC Container
 *   It is responsible for instantiating, configuring, and assembling the beans
@@ -168,6 +163,28 @@ Setter injection should primarily only be used for optional dependencies that ca
 *   For example: **Class A** requires an instance of **Class B** through constructor injection, and class B requires an instance of Class A through constructor injection.
 *   If we configure beans for classes **A** and **B** to be injected into each other, the **Spring IoC** container detects this circular reference at runtime and throw a **BeanCurrentlyCreationException**
 
+
+**Importing XML Configurations**
+
+![drawing](src/main/resources/assets/importingXmlTree.png)
+
+An example of importing bean configuration:
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="applicationContextBeanImport-instrument.xml" />
+
+    <bean id="artist" class="spring.core.bean.imports.Artist">
+        <property name="name" value="Jhonny Boy" />
+        <property name="instrument" ref="instrument" />
+    </bean>
+</beans>
+```
 
 There are three ways of dependency injection that will be managed by Spring IoC container
 
