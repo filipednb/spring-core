@@ -118,8 +118,10 @@ public class ArtistConfiguration {
 
 ```
 
-In annotation configuration of a bean the method name will be the name of the bean inside IoC container or as this: @Bean(name = “nameOfBean”).
-
+In annotation configuration of a bean the method name will be the name of the bean inside IoC container or as this: 
+```java
+@Bean(name = "nameOfBean")
+```
 **BeanFactory Interface**
 
 
