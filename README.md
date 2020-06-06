@@ -186,7 +186,27 @@ An example of importing bean configuration:
 </beans>
 ```
 
+**Inner Bean**
+
+Another way of declaring a dependency bean inside another is defining a `<bean />` element inside the `<property />` or `<constructor-arg />` elements. It defines an inner bean.
+
 There are three ways of dependency injection that will be managed by Spring IoC container
+
+```xml
+<import resource="applicationContextBeanImport-instrument.xml" />
+
+<bean id="artist" class="spring.core.bean.imports.Artist">
+    <property name="name" value="Jhonny Boy" />
+    <property name="instrument">
+        <bean class="spring.core.bean.imports.Instrument">
+            <property name="id" value="88" />
+            <property name="name" value="Eletric Piano" />
+        </bean>
+    </property>
+</bean>
+```
+
+
 
 ```java
  
