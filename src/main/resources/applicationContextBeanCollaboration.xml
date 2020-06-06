@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="costumer" class="spring.core.bean.collaboration.Customer">
+        <property name="id" value="150" />
+        <property name="firstName" value="Jhon" />
+        <property name="lastName" value="Doe" />
+        <property name="address" ref="address" />
+    </bean>
+
+    <bean id="address" class="spring.core.bean.collaboration.Address">
+        <property name="unit" value="150" />
+        <property name="street" value="Juscelino Kubistchek" />
+        <property name="district" value="SP" />
+        <property name="country" value="Brasil" />
+    </bean>
+
+</beans>

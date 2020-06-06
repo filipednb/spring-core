@@ -1,12 +1,12 @@
-package spring.core.tasks;
+package java.traditional.way.of.injection;
 
 public class User {
 
-    private long id;
+    private int id;
     private  String name;
 
 
-    public User(long id, String name) {
+    public User(int id, String name) {
         this.id = id;
         this.name = name;
     }

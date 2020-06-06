@@ -1,9 +1,9 @@
-package spring.core.java.config;
+package spring.core.java.annotation.config;
 
 public class Artist {
 
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
 
     public Artist(String firstName, String lastName) {
         this.firstName = firstName;

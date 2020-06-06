@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Passing values by constructor parameters names -->
+    <!--
+    <bean id="person" class="spring.core.xml.config.constructor.Person">
+        <constructor-arg name="id" value="150" />
+        <constructor-arg name="firstName" value="Jhon" />
+        <constructor-arg name="lastName" value="Doe" />
+    </bean>
+    -->
+
+    <!-- Passing values by constructor parameters indexes -->
+    <!--
+    <bean id="person" class="spring.core.xml.config.constructor.Person">
+        <constructor-arg index="0" value="150" />
+        <constructor-arg index="1" value="Jhon" />
+        <constructor-arg index="2" value="Doe" />
+    </bean>
+    -->
+
+    <!-- Passing values by constructor parameters indexes -->
+    <bean id="person" class="spring.core.xml.config.constructor.Person">
+        <constructor-arg type="java.lang.Integer" value="150" />
+        <constructor-arg type="java.lang.String" value="Jhon" />
+        <constructor-arg type="java.lang.String" value="Doe" />
+    </bean>
+
+</beans>
