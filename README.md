@@ -118,7 +118,7 @@ public class ArtistConfiguration {
 
 ```
 
-In annotation configuration of a bean the method name will be the name of the bean inside IoC container or as this: 
+In annotation configuration of a bean the method name will be the name of the bean inside IoC container or a name given in this way: 
 ```java
 @Bean(name = "nameOfBean")
 ```
@@ -169,26 +169,23 @@ Setter injection should primarily only be used for optional dependencies that ca
 *   If we configure beans for classes **A** and **B** to be injected into each other, the **Spring IoC** container detects this circular reference at runtime and throw a **BeanCurrentlyCreationException**
 
 
+There are three ways of dependency injection that will be managed by Spring IoC container
+
 ```java
-public class UserService {
+ 
+// 1 - By Autowired annotation
+@Autowired
+private UserRepository repository;
 
-    private UserRepository repository;
+// 2 - By constructor parameter
+public UserService(UserRepository repository) {
+    this.repository = repository;
+}         
 
-    @Autowired // 1←
-    private UserRepository repository;
-
-    public UserService(UserRepository repository) { // 2 ←
-        this.repository = repository;
-    }         
-    
-    public void setRepository(UserRepository repository){ // 3 ←
-        this.repository;
-    }
-    
-        public boolean createUser(int Id, String name) {
-            User user = new User(1L, "Sebastian");
-            repository.save(user);
-    }
-
+// 3 - By Setter method
+public void setRepository(UserRepository repository){ // 3 ←
+    this.repository;
 }
+
+
 ```
