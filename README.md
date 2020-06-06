@@ -14,21 +14,24 @@ A Java Application is a collection of Objects. In a good application we will hav
 UserService depends on UserRepository UserService -> UserRepository
 
 So a way to do is like this:
+```java
 
-    public class UserService {
+public class UserService {
     
-        private UserRepository repository;
-            public UserService() {
-            UserRepository repository = new UserRepository();
-            this.repository = repository;
-        
-        }
-        
-        public void create() {
-            repository.save(new User(1L, “Sebastian”));
-        }
+    private UserRepository repository;
+        public UserService() {
+        UserRepository repository = new UserRepository();
+        this.repository = repository;
     
     }
+    
+    public void create() {
+        repository.save(new User(1L, "Sebastian"));
+    }
+
+}
+
+```
 
 **Traditional Way of dependency injection - Drawbacks**
 
@@ -126,31 +129,31 @@ Setter injection should primarily only be used for optional dependencies that ca
 
 **Circular Dependency**
 
-
-
 *   If we use predominantly constructor injection, it is possible to create an unresolvable circular dependency scenario
 *   For example: **Class A** requires an instance of **Class B** through constructor injection, and class B requires an instance of Class A through constructor injection.
 *   If we configure beans for classes **A** and **B** to be injected into each other, the **Spring IoC** container detects this circular reference at runtime and throw a **BeanCurrentlyCreationException**
 
 
-    public class UserService {
+```java
+public class UserService {
+
+    private UserRepository repository;
+
+    @Autowired // 1←
+    private UserRepository repository;
+
+    public UserService(UserRepository repository) { // 2 ←
+        this.repository = repository;
+    }         
     
-        private UserRepository repository;
-    
-        @Autowired // 1←
-        private UserRepository repository;
-    
-        public UserService(UserRepository repository) { // 2 ←
-            this.repository = repository;
-        }         
-        
-        public void setRepository(UserRepository repository){ // 3 ←
-            this.repository;
-        }
-        
-            public boolean createUser(int Id, String name) {
-                User user = new User(1L, “Sebastian”);
-                repository.save(user);
-        }
-    
+    public void setRepository(UserRepository repository){ // 3 ←
+        this.repository;
     }
+    
+        public boolean createUser(int Id, String name) {
+            User user = new User(1L, "Sebastian");
+            repository.save(user);
+    }
+
+}
+```
