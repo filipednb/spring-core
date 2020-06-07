@@ -1,4 +1,4 @@
-package java.traditional.way.of.injection;
+package traditional.way.of.object.injection;
 
 public class UserService {
 
