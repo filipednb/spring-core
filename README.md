@@ -59,6 +59,10 @@ When a POJO is inside of a Spring IoC container it is known as Beans.
 
 **Spring IoC Container**
 
+The `org.springframework.beans` and `org.springframework.context` packages are the basis for Spring Framework's IoC container. The `BeanFactory` interface provides an advanced configuration mechanism capable of managing any type of object. `ApplicationContext` is a sub-interface of BeanFactory. It adds easier integration with Spring's AOP features; message resource handling (for use in internationalization), event publication; and application-layer specific contexts such as the `WebApplicationContext` for use in web applications.
+
+In short, the `BeanFactory` provides the configuration framework and basic functionality, and the `ApplicationContext` adds more enterprise-specific functionality. The ApplicationContext is a complete superset of the BeanFactory
+
 *   ApplicationContext interface represents the Spring IoC Container
 *   It is responsible for instantiating, configuring, and assembling the beans
 *   Container get its instructions on what objects to instantiate, configure and assemble by reading configuration metadata
@@ -190,8 +194,6 @@ An example of importing bean configuration:
 
 Another way of declaring a dependency bean inside another is defining a `<bean />` element inside the `<property />` or `<constructor-arg />` elements. It defines an inner bean.
 
-There are three ways of dependency injection that will be managed by Spring IoC container
-
 ```xml
 <import resource="applicationContextBeanImport-instrument.xml" />
 
@@ -205,7 +207,106 @@ There are three ways of dependency injection that will be managed by Spring IoC 
     </property>
 </bean>
 ```
+**Handling Java Collections**
 
+We can populate sets, lists and maps by creating a application context XML configuration like below:
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="collection" class="spring.core.collections.CollectionHolder">
+        <property name="myList">
+            <list>
+                <value>List 1</value>
+                <value>List 2</value>
+            </list>
+        </property>
+        <property name="mySet">
+            <set>
+                <value>Set 1</value>
+                <value>Set 2</value>
+            </set>
+        </property>
+        <property name="myMap">
+            <map>
+                <entry key="Key 1" value="value 2" />
+                <entry key="Key 2" value="value 3" />
+                <entry key="Key 3" value="value 3" />
+            </map>
+        </property>
+        <property name="myPlayers">
+            <list>
+                <ref bean="player1" />
+                <ref bean="player2" />
+                <ref bean="player3" />
+            </list>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="username">admin</prop>
+                <prop key="password">admin</prop>
+                <prop key="dataSourceUrl">http://localhost:3060</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="player1" class="spring.core.collections.Player">
+        <property name="id" value="1" />
+        <property name="name" value="Filipe Player" />
+    </bean>
+    <bean id="player2" class="spring.core.collections.Player">
+        <constructor-arg name="id" value="2" />
+        <constructor-arg name="name" value="Jhonny Player" />
+    </bean>
+    <bean id="player3" class="spring.core.collections.Player">
+        <constructor-arg name="id" value="3" />
+        <constructor-arg name="name" value="Bastião Player" />
+    </bean>
+</beans>
+```
+
+**Merging Collections**
+
+Spring can deal with merging similar collections of two classes. An example is, if we have a **Abstract Class A** and another **Class B** that extends from it and both have similar properties then Spring will merge those properties.
+We need to declare child property->props with the attribute `merge=true`. 
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="details" abstract="true" class="spring.core.collections.merging.Details">
+        <property name="details">
+            <props>
+                <prop key="email1">admin@admin.com</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="userDetails" parent="details" class="spring.core.collections.merging.UserDetails">
+        <property name="details">
+            <props merge="true">
+                <prop key="email2">admin2@admin2.com</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
+```
+
+
+
+
+
+
+
+
+
+
+There are three ways of dependency injection that will be managed by Spring IoC container.
 
 
 ```java
