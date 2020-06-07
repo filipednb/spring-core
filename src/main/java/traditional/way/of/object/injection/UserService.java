@@ -6,6 +6,11 @@ public class UserService {
 
     public UserService() {
         this.repository = new UserRepository();
+        System.out.println("Repository id: " + this.repository);
+    }
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
     }
 
     public void save(User user) {
