@@ -174,6 +174,22 @@ Setter injection should primarily only be used for optional dependencies that ca
 
 An example of importing bean configuration:
 
+Declaring:
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="instrument" class="spring.core.bean.imports.Instrument">
+        <property name="id" value="85" />
+        <property name="name" value="Acoustic Guitar" />
+    </bean>
+</beans>
+```
+
+Importing:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
