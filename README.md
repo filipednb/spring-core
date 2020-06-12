@@ -1,5 +1,5 @@
 
-**Spring Overview**
+##Spring Overview
 
 “Spring framework is a Java platform that provides comprehensive infrastructure support for developing Java applications. Spring handles the infrastructure so you can focus on your application” 
 
@@ -44,7 +44,7 @@ He is also responsible for initializing and providing dependencies to child obje
 *   Spring IoC container is here to help - We provide Spring container bean definitions and let it manage the object creation, initialization, assembling and also manage the dependency graph.
 *   Bean definition can be provided through XML bean definition configuration file or through Java annotations
 
-**How Spring IoC Container works**
+##How Spring IoC Container works
 
 
 ![drawing](src/main/resources/assets/beanCreationFlow.png)
@@ -57,7 +57,7 @@ A POJO cannot implement or extends any other classes that needs a class path.
 
 When a POJO is inside of a Spring IoC container it is known as Beans.
 
-**Spring IoC Container**
+##Spring IoC Container
 
 The `org.springframework.beans` and `org.springframework.context` packages are the basis for Spring Framework's IoC container. The `BeanFactory` interface provides an advanced configuration mechanism capable of managing any type of object. `ApplicationContext` is a sub-interface of BeanFactory. It adds easier integration with Spring's AOP features; message resource handling (for use in internationalization), event publication; and application-layer specific contexts such as the `WebApplicationContext` for use in web applications.
 
@@ -121,7 +121,7 @@ In annotation configuration of a bean the method name will be the name of the be
 ```java
 @Bean(name = "nameOfBean")
 ```
-**BeanFactory Interface**
+##BeanFactory Interface
 
 
 
@@ -130,7 +130,7 @@ In annotation configuration of a bean the method name will be the name of the be
 *   This is the basic client view of a bean container
 *   This interface is implemented by objects that hold a number of bean definitions, each uniquely identified by a String name
 
-**ApplicationContext Interface**
+##ApplicationContext Interface
 
 *   Central interface to provide configuration for a Spring application
 *   This is read-only while the application is running, but may be reloaded if the implementation support this
@@ -312,7 +312,7 @@ We need to declare child property->props with the attribute `merge=true`.
     </bean>
 </beans>
 ```
-## Depends On ##
+## Depends On
 - At times, we want to force the container to load one or more bean 
 before the dependent bean is loaded
 - With depends-on, Spring IoC initializes depending beans before craeating the actual bean
@@ -339,7 +339,7 @@ class spring.core.bean.depends.on.Initializer was initialized.
 class spring.core.bean.depends.on.InitializerDependent was initialized.
 ```
 
-## Lazy Initizlization ##
+## Lazy Initizlization
 
 - By default Spring loads bean with eager initialization, Spring IoC container will load all 
 beans, even if we not use it.
@@ -353,7 +353,68 @@ beans, even if we not use it.
 ```
 
 
-## Loading Multiple XML files in same container ##
+## Loading Multiple XML files in same container
+
+We can load multiple config files by passing it to ClassPathXmlApplicationContext constructor, like this:
+
+```java
+public class AlbumMain {
+    public static void main(String[] args) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
+                "applicationContext-album.xml", "applicationContext-music.xml");
+
+        System.out.println(applicationContext.getBean(Music.class));
+        System.out.println(applicationContext.getBean(Album.class));
+    }
+}
+```
+
+## FileSystemXmlApplicationContext
+
+We can use an external Xml config file by passing its absolute path to FileSystemXmlApplicationContext constructor:
+
+```java
+public class FileSystemApplicationContextMain {
+
+    public static void main(String[] args) {
+
+        String path = new FileSystemResource("").getFile().getAbsolutePath();
+        ApplicationContext applicationContext = new FileSystemXmlApplicationContext(
+                "file://" + path + "/src/main/resources/applicationContext-album.xml",
+                "file://" + path + "/src/main/resources/applicationContext-music.xml");
+        System.out.println(applicationContext.getBean(Album.class));
+        System.out.println(applicationContext.getBean(Music.class));
+    }
+}
+```
+
+Don't forget to `file: //` before the absolute path. Note that in this case, I'm using an XML file within the project,
+but it could be stored elsewhere. Also, I'm getting the projects `path` to make it dynamic, but a simple String with XML's absolute path
+will work.
+
+# Autowiring 
+## Configuring beans Automatically
+
+**What is Autowiring?**
+
+- Spring can automatically manage (wire) the dependencies by inspecting the container.
+This is known as **Autowiring**
+- Autowiring can significantly reduce the need to specify properties or constructor arguments
+- Autowiring can update a configuration as objects evolve. For example, a new dependency to a class is added,
+that dependency can be satisfied automactically without a need to modify the configuration
+
+##Autowiring modes
+
+| **Mode**     | **Explanation**  |
+| ------------ | ------------- |
+|  no          | (Default) No autowiring. Bean references must be defined by `ref` elements. Changing the default setting is not recommended for larger deployments, because specifying collaboratores explicitly gives greater control and clarity. To some extent, it documents the structure of a system |
+|  byName      | Autowiring by property name. Spring looks for a bean with the same name as the property that needs to be autowired. For example, if a bean definition is set to autowire by name and it contains a `master` property (that is, it has a `setMaster(...)` method), Spring looks for a bean definition named `master` and uses it to set the property |
+|  byType      | Lets a property be autowired if exactly one bean of the property type exists in the container. If more than one exists a fatal exception is thrown, which indicates that you may not use `byType` autowiring for that bean. If there are no matching beans, nothing happens (the property is not set).
+|  constructor  | Analogous to `byType` but applies to constructor arguments. if there is not exactly one bean of the constructor argument type in the container, a fatal error is raised |
+
+
+
+
 
 
 
