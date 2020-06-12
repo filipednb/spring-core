@@ -339,12 +339,12 @@ class spring.core.bean.depends.on.Initializer was initialized.
 class spring.core.bean.depends.on.InitializerDependent was initialized.
 ```
 
-## Lazy Initizlization
+## Lazy Initialization
 
 - By default Spring loads bean with eager initialization, Spring IoC container will load all 
 beans, even if we not use it.
 - However, it's possible to load beans on a lazy loading basis.
-- For lazy loading initialization we need to set `lazy-init=true` into bean configuration properties
+- For lazy loading initialization we need to set `lazy-init=true` in bean properties
 
 ```xml
 <bean id="lazy-initialized" lazy-init="true" class="spring.core.bean.lazy.inicialization.LazyInitializedBean">
@@ -389,7 +389,7 @@ public class FileSystemApplicationContextMain {
 ```
 
 Don't forget to `file: //` before the absolute path. Note that in this case, I'm using an XML file within the project,
-but it could be stored elsewhere. Also, I'm getting the projects `path` to make it dynamic, but a simple String with XML's absolute path
+but it could be stored elsewhere. Also, I'm getting the project's `path` to make it dynamic, but a simple String with XML's absolute path
 will work.
 
 # Autowiring 

@@ -4,3 +4,4 @@
 .idea
 spring-core.iml
 target
+.attach*
