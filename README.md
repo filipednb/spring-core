@@ -312,7 +312,35 @@ We need to declare child property->props with the attribute `merge=true`.
     </bean>
 </beans>
 ```
+## Depends On ##
+- At time, we want to force the container to load one or more bean 
+before the dependent bean is loaded
+- With depends-on, Spring IoC initializes depending beans before craeating the actual bean
+- In the similar way, Spring destroys the depending beans first and then the actural bean
 
+To see it happen we make a configure XML creating a bean thats depends on another bean:
+```xml
+    <bean depends-on="init" id="initializer-dependent" class="spring.core.bean.depends.on.InitializerDependent" />
+    <bean id="init" class="spring.core.bean.depends.on.Initializer" />
+```
+Later we get the "dependent" bean from IoC container: 
+
+```java
+public class InitializerMain {
+    public static void main(String[] args) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContextDependsOn.xml");
+        InitializerDependent initializer = applicationContext.getBean(InitializerDependent.class);
+    }
+}
+
+```
+
+And we see that both beans was loaded:
+```shell script
+/home/s2it_ftagliacozzi/.jabba/jdk/openjdk@1.12/bin/java -javaagent:/snap/intellij-idea-community/232/lib/idea_rt.jar=46123:/snap/intellij-idea-community/232/bin -Dfile.encoding=UTF-8 -classpath /home/s2it_ftagliacozzi/estudos/spring-core/target/classes:/home/s2it_ftagliacozzi/.m2/repository/org/springframework/spring-core/5.2.6.RELEASE/spring-core-5.2.6.RELEASE.jar:/home/s2it_ftagliacozzi/.m2/repository/org/springframework/spring-jcl/5.2.6.RELEASE/spring-jcl-5.2.6.RELEASE.jar:/home/s2it_ftagliacozzi/.m2/repository/org/springframework/spring-context/5.2.6.RELEASE/spring-context-5.2.6.RELEASE.jar:/home/s2it_ftagliacozzi/.m2/repository/org/springframework/spring-aop/5.2.6.RELEASE/spring-aop-5.2.6.RELEASE.jar:/home/s2it_ftagliacozzi/.m2/repository/org/springframework/spring-beans/5.2.6.RELEASE/spring-beans-5.2.6.RELEASE.jar:/home/s2it_ftagliacozzi/.m2/repository/org/springframework/spring-expression/5.2.6.RELEASE/spring-expression-5.2.6.RELEASE.jar spring.core.bean.depends.on.InitializerMain
+class spring.core.bean.depends.on.Initializer was initialized.
+class spring.core.bean.depends.on.InitializerDependent was initialized.
+```
 
 
 
