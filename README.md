@@ -313,12 +313,12 @@ We need to declare child property->props with the attribute `merge=true`.
 </beans>
 ```
 ## Depends On ##
-- At time, we want to force the container to load one or more bean 
+- At times, we want to force the container to load one or more bean 
 before the dependent bean is loaded
 - With depends-on, Spring IoC initializes depending beans before craeating the actual bean
 - In the similar way, Spring destroys the depending beans first and then the actural bean
 
-To see it happen we make a configure XML creating a bean thats depends on another bean:
+To see it happen we make a configure XML creating first a bean thats depends on another bean:
 ```xml
     <bean depends-on="init" id="initializer-dependent" class="spring.core.bean.depends.on.InitializerDependent" />
     <bean id="init" class="spring.core.bean.depends.on.Initializer" />
@@ -332,17 +332,19 @@ public class InitializerMain {
         InitializerDependent initializer = applicationContext.getBean(InitializerDependent.class);
     }
 }
-
 ```
-
-And we see that both beans was loaded:
+And we see in stdout that both beans was loaded: 
 ```shell script
-/home/s2it_ftagliacozzi/.jabba/jdk/openjdk@1.12/bin/java -javaagent:/snap/intellij-idea-community/232/lib/idea_rt.jar=46123:/snap/intellij-idea-community/232/bin -Dfile.encoding=UTF-8 -classpath /home/s2it_ftagliacozzi/estudos/spring-core/target/classes:/home/s2it_ftagliacozzi/.m2/repository/org/springframework/spring-core/5.2.6.RELEASE/spring-core-5.2.6.RELEASE.jar:/home/s2it_ftagliacozzi/.m2/repository/org/springframework/spring-jcl/5.2.6.RELEASE/spring-jcl-5.2.6.RELEASE.jar:/home/s2it_ftagliacozzi/.m2/repository/org/springframework/spring-context/5.2.6.RELEASE/spring-context-5.2.6.RELEASE.jar:/home/s2it_ftagliacozzi/.m2/repository/org/springframework/spring-aop/5.2.6.RELEASE/spring-aop-5.2.6.RELEASE.jar:/home/s2it_ftagliacozzi/.m2/repository/org/springframework/spring-beans/5.2.6.RELEASE/spring-beans-5.2.6.RELEASE.jar:/home/s2it_ftagliacozzi/.m2/repository/org/springframework/spring-expression/5.2.6.RELEASE/spring-expression-5.2.6.RELEASE.jar spring.core.bean.depends.on.InitializerMain
 class spring.core.bean.depends.on.Initializer was initialized.
 class spring.core.bean.depends.on.InitializerDependent was initialized.
 ```
 
+## Lazy Initizlization ##
 
+- By default Spring loads bean with eager initialization, Spring IoC container will load all 
+beans, even if we not use it.
+- However, it's possible to load beans on a lazy loading basis.
+- For lazy loading initialization we need to set `lazy-init=true` into bean configuration properties
 
 
 
