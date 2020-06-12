@@ -1,9 +1,9 @@
 
-## Spring Overview
+# Spring Overview
 
 “Spring framework is a Java platform that provides comprehensive infrastructure support for developing Java applications. Spring handles the infrastructure so you can focus on your application” 
 
-**Introducing objects dependencies**
+## Introducing objects dependencies
 
 A Java Application is a collection of Objects. In a good application we will have several objects with their own responsibilities. And those objects can be dependent on each other.
 
@@ -44,7 +44,7 @@ He is also responsible for initializing and providing dependencies to child obje
 *   Spring IoC container is here to help - We provide Spring container bean definitions and let it manage the object creation, initialization, assembling and also manage the dependency graph.
 *   Bean definition can be provided through XML bean definition configuration file or through Java annotations
 
-##How Spring IoC Container works
+## How Spring IoC Container works
 
 
 ![drawing](src/main/resources/assets/beanCreationFlow.png)
@@ -57,7 +57,7 @@ A POJO cannot implement or extends any other classes that needs a class path.
 
 When a POJO is inside of a Spring IoC container it is known as Beans.
 
-##Spring IoC Container
+## Spring IoC Container
 
 The `org.springframework.beans` and `org.springframework.context` packages are the basis for Spring Framework's IoC container. The `BeanFactory` interface provides an advanced configuration mechanism capable of managing any type of object. `ApplicationContext` is a sub-interface of BeanFactory. It adds easier integration with Spring's AOP features; message resource handling (for use in internationalization), event publication; and application-layer specific contexts such as the `WebApplicationContext` for use in web applications.
 
@@ -121,7 +121,7 @@ In annotation configuration of a bean the method name will be the name of the be
 ```java
 @Bean(name = "nameOfBean")
 ```
-##BeanFactory Interface
+## BeanFactory Interface
 
 
 
@@ -130,7 +130,7 @@ In annotation configuration of a bean the method name will be the name of the be
 *   This is the basic client view of a bean container
 *   This interface is implemented by objects that hold a number of bean definitions, each uniquely identified by a String name
 
-##ApplicationContext Interface
+## ApplicationContext Interface
 
 *   Central interface to provide configuration for a Spring application
 *   This is read-only while the application is running, but may be reloaded if the implementation support this
@@ -403,7 +403,7 @@ This is known as **Autowiring**
 - Autowiring can update a configuration as objects evolve. For example, a new dependency to a class is added,
 that dependency can be satisfied automactically without a need to modify the configuration
 
-##Autowiring modes
+## Autowiring modes
 
 | **Mode**     | **Explanation**  |
 | ------------ | ------------- |
