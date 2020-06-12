@@ -346,8 +346,14 @@ beans, even if we not use it.
 - However, it's possible to load beans on a lazy loading basis.
 - For lazy loading initialization we need to set `lazy-init=true` into bean configuration properties
 
+```xml
+<bean id="lazy-initialized" lazy-init="true" class="spring.core.bean.lazy.inicialization.LazyInitializedBean">
+    <constructor-arg name="helloPhrase" value="This bean was initialized lazily" />
+</bean>
+```
 
 
+## Loading Multiple XML files in same container ##
 
 
 

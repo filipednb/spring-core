@@ -7,7 +7,7 @@ public class LazyMainCallingBean {
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContextLazyInitialization.xml");
-        applicationContext.getBean(LazyInitializedBean.class);
+        applicationContext.getBean("lazy-initialized");
     }
 
 }

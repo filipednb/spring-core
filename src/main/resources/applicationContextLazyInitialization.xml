@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="lazy-init" lazy-init="true" class="spring.core.bean.lazy.inicialization.LazyInitializedBean">
+    <bean id="lazy-initialized" lazy-init="true" class="spring.core.bean.lazy.inicialization.LazyInitializedBean">
         <constructor-arg name="helloPhrase" value="This bean was initialized lazily" />
     </bean>
 
