@@ -568,7 +568,43 @@ exception `NoSuchBeanDefinitionException`
 
 - Confusing Nature: If you have lot of dependency in a program, then it’s hard to find using autowire attribute of bean.
  
+---
+ 
  # Java Based Configuration
+ 
+ So far we have seen several ways to configure beans using XML files, from now on we will 
+ see how to define settings using **Java language** itself, using classes, annotations and constructors.
+ 
+ ![drawing](src/main/resources/assets/javaBasedBeansConfiguration.png)
+ 
+ ## @Configuration
+ `studying.spring.core.java.annotation.configuration`
+ 
+ In this example we will use a java class annotated with `@Configuration` having a method annotated 
+ with `@Bean` that returns a new instance of Product. And its
+ 
+ ```java
+package studying.spring.core.java.annotation.configuration;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class ProductConfiguration {
+
+    @Bean
+    public Product product() {
+        Product product = new Product();
+        product.setId(1);
+        product.setDescription("Tablet Fire Pro");
+        return product;
+    }
+}
+```
+
+As you can see in `studying.spring.core.java.annotation.configuration.ProductMain.java` we are now creating
+ a ApplicationContext object of another extension/implementation called `AnnotationConfigApplicationContext` 
+ that is in charge to read java configuration files and delegating the creation of beans. 
  
  
 ---
