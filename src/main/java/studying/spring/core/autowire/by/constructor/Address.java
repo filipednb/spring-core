@@ -1,4 +1,4 @@
-package studying.spring.core.autowire.no;
+package studying.spring.core.autowire.by.constructor;
 
 public class Address {
 

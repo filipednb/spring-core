@@ -29,6 +29,8 @@ public class UserService {
 
 }
 ```
+Note that we are in charge to instantiate objects that we need, as we can see in `respository` object:
+`UserRepository repository = new UserRepository();` 
 
 **Traditional Way of dependency injection - Drawbacks**
 
@@ -418,12 +420,137 @@ that dependency can be satisfied automactically without a need to modify the con
 # no (No autowiring)
 
 We will not get our beans automatically wired each other if we don't explicit their 
-references with `ref` bean attribute. So, we have to do the relationship ourselves as in this example:
+references with `ref` attribute. So, we have to do the relationship ourselves as in this example:
 
+```xml
+<bean id="user" class="studying.spring.core.autowire.no.User">
+    <property name="id" value="1" />
+    <property name="name" value="Sebastian Doe" />
+    <property name="address" ref="address" />
+</bean>
 
+<bean id="address" class="studying.spring.core.autowire.no.Address">
+    <property name="number" value="1218" />
+    <property name="street" value="Fort Lauderdale St" />
+    <property name="country" value="Tuwalu" />
+</bean>
+```
 
+# byName
 
+With `autowire="byName"` attribute Spring will look for a available bean to replace the
+property of dependent class, the configuration should be like in this example:
 
+```xml
+<bean id="user" class="studying.spring.core.autowire.by.name.User" autowire="byName">
+    <property name="id" value="1" />
+    <property name="name" value="Sebastian Doe" />
+</bean>
+
+<bean id="address" class="studying.spring.core.autowire.by.name.Address">
+    <property name="number" value="1218" />
+    <property name="street" value="Fort Lauderdale St" />
+    <property name="country" value="Tuwalu" />
+</bean>
+``` 
+Note that in XML configuration we don't defined address property in user bean. And even so when executing 
+`studying.spring.core.autowire.by.name.UserMain` 
+main we can see that Spring replace the User.address with an the bean `address`
+ because they share the same name, the standard output should be:
+ 
+```shell script
+User{id=1, name='Sebastian Doe', address=Address{number='1218', street='Fort Lauderdale St', country='Tuwalu'}}
+```
+# byType
+
+It have the same behavior of `byName` way, but will look by a bean of the same type.
+
+```xml
+<bean id="user" class="studying.spring.core.autowire.by.type.User" autowire="byType">
+    <property name="id" value="1" />
+    <property name="name" value="Sebastian Doe" />
+</bean>
+
+<bean id="address" class="studying.spring.core.autowire.by.type.Address">
+    <property name="number" value="1218" />
+    <property name="street" value="Fort Lauderdale St" />
+    <property name="country" value="Tuwalu" />
+</bean>
+```
+Now, the bean id is not important but if we have more than one beans of same type Spring will thown an error:
+
+`UnsatisfiedDependencyException ... expected single matching bean but found 2: ...` 
+
+# constructor
+
+Spring will inject the correct dependency if we specify in the class constructor the bean that we want, we just 
+need to define `autowire="constructor"` like so:
+
+```xml
+    <bean id="user" class="studying.spring.core.autowire.by.constructor.User" autowire="constructor" >
+        <constructor-arg name="id" value="1" />
+        <constructor-arg name="name" value="Sebastian Doe" />
+    </bean>
+
+    <bean id="address" class="studying.spring.core.autowire.by.constructor.Address">
+        <property name="number" value="1218" />
+        <property name="street" value="Fort Lauderdale St" />
+        <property name="country" value="Tuwalu" />
+    </bean>
+```
+
+The User class now is like this:
+
+```java
+package studying.spring.core.autowire.by.constructor;
+
+public class User {
+
+    private int id;
+    private String name;
+    private Address address;
+
+    public User(int id, String name, Address address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address=" + address +
+                '}';
+    }
+}
+
+```
+
+If bean property says that autowire have `constructor`  value and Spring don't found all the beans it will thown an 
+exception `NoSuchBeanDefinitionException` 
+
+# Autowiring Drawbacks (disadvantages)
+
+- Autowire is not supported for Primitive types 
+
+- Autowiring is less exact than explicit wiring. Spring is careful to avoid guessing in the case of ambiguity that might have unexpected results, the relationships between Spring-managed objects are no longer document explicitly.
+
+- Wiring information may not be available to tools that generate documentation from a Spring container.
+
+- Multiple bean definition within the container may match the type specified by the constructor or setter method argument to be autowired.
+
+- Overriding possibilities: We can define dependencies using property or constructor-args tag which will always override autowiring.
+
+- Primitive data type: We have to define primitive data types String or Integer using property or constructor-args tag. You cannot autowire these tags.
+
+- Confusing Nature: If you have lot of dependency in a program, then it’s hard to find using autowire attribute of bean.
+ 
+ 
+ 
+ 
+----------------------------------------
 
 There are three ways of dependency injection that will be managed by Spring IoC container.
 

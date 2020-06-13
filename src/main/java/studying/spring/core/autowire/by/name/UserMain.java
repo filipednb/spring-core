@@ -1,4 +1,4 @@
-package studying.spring.core.autowire.no;
+package studying.spring.core.autowire.by.name;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class UserMain {
 
     public static void main(String[] args) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContextAutowire-no.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContextAutowire-by-name.xml");
 
         System.out.println(applicationContext.getBean(User.class));
     }

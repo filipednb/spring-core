@@ -1,4 +1,4 @@
-package studying.spring.core.autowire.no;
+package studying.spring.core.autowire.by.constructor;
 
 public class User {
 
@@ -6,27 +6,9 @@ public class User {
     private String name;
     private Address address;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public User(int id, String name, Address address) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
         this.address = address;
     }
 
