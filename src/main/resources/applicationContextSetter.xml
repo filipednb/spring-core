@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- Passing values by setter -->
-    <bean id="book" class="spring.core.xml.config.setter.Book">
+    <bean id="book" class="studying.spring.core.xml.config.setter.Book">
         <property name="id" value="50" />
         <property name="name" value="Spring Boot no Secrets" />
         <property name="author" value="Uncle Bob" />

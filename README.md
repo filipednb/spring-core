@@ -78,13 +78,13 @@ There is two different ways of configuring a bean:
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="product" class="spring.core.xml.config.Product">
+    <bean id="product" class="studying.spring.core.xml.config.Product">
         <constructor-arg name="id" value="A123" />
         <constructor-arg name="name" value="Notebook" />
         <constructor-arg name="productDescription" value="Awesome notebook from Acer TM" />
     </bean>
 
-    <bean id="product2" class="spring.core.xml.config.Product">
+    <bean id="product2" class="studying.spring.core.xml.config.Product">
         <constructor-arg name="id" value="B666" />
         <constructor-arg name="name" value="SmartPhone" />
         <constructor-arg name="productDescription" value="Very nice Fone" />
@@ -98,7 +98,7 @@ There is two different ways of configuring a bean:
 package spring.core.java.annotation.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Configuration;import studying.spring.core.java.annotation.config.Artist;
 
 @Configuration
 public class ArtistConfiguration {
@@ -182,7 +182,7 @@ Declaring:
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="instrument" class="spring.core.bean.imports.Instrument">
+    <bean id="instrument" class="studying.spring.core.bean.imports.Instrument">
         <property name="id" value="85" />
         <property name="name" value="Acoustic Guitar" />
     </bean>
@@ -199,7 +199,7 @@ Importing:
 
     <import resource="applicationContextBeanImport-instrument.xml" />
 
-    <bean id="artist" class="spring.core.bean.imports.Artist">
+    <bean id="artist" class="studying.spring.core.bean.imports.Artist">
         <property name="name" value="Jhonny Boy" />
         <property name="instrument" ref="instrument" />
     </bean>
@@ -213,10 +213,10 @@ Another way of declaring a dependency bean inside another is defining a `<bean /
 ```xml
 <import resource="applicationContextBeanImport-instrument.xml" />
 
-<bean id="artist" class="spring.core.bean.imports.Artist">
+<bean id="artist" class="studying.spring.core.bean.imports.Artist">
     <property name="name" value="Jhonny Boy" />
     <property name="instrument">
-        <bean class="spring.core.bean.imports.Instrument">
+        <bean class="studying.spring.core.bean.imports.Instrument">
             <property name="id" value="88" />
             <property name="name" value="Eletric Piano" />
         </bean>
@@ -234,7 +234,7 @@ We can populate sets, lists and maps by creating a application context XML confi
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="collection" class="spring.core.collections.CollectionHolder">
+    <bean id="collection" class="studying.spring.core.collections.CollectionHolder">
         <property name="myList">
             <list>
                 <value>List 1</value>
@@ -269,15 +269,15 @@ We can populate sets, lists and maps by creating a application context XML confi
             </props>
         </property>
     </bean>
-    <bean id="player1" class="spring.core.collections.Player">
+    <bean id="player1" class="studying.spring.core.collections.Player">
         <property name="id" value="1" />
         <property name="name" value="Filipe Player" />
     </bean>
-    <bean id="player2" class="spring.core.collections.Player">
+    <bean id="player2" class="studying.spring.core.collections.Player">
         <constructor-arg name="id" value="2" />
         <constructor-arg name="name" value="Jhonny Player" />
     </bean>
-    <bean id="player3" class="spring.core.collections.Player">
+    <bean id="player3" class="studying.spring.core.collections.Player">
         <constructor-arg name="id" value="3" />
         <constructor-arg name="name" value="Bastião Player" />
     </bean>
@@ -296,14 +296,14 @@ We need to declare child property->props with the attribute `merge=true`.
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="details" abstract="true" class="spring.core.collections.merging.Details">
+    <bean id="details" abstract="true" class="studying.spring.core.collections.merging.Details">
         <property name="details">
             <props>
                 <prop key="email1">admin@admin.com</prop>
             </props>
         </property>
     </bean>
-    <bean id="userDetails" parent="details" class="spring.core.collections.merging.UserDetails">
+    <bean id="userDetails" parent="details" class="studying.spring.core.collections.merging.UserDetails">
         <property name="details">
             <props merge="true">
                 <prop key="email2">admin2@admin2.com</prop>
@@ -320,8 +320,8 @@ before the dependent bean is loaded
 
 To see it happen we make a configure XML creating first a bean thats depends on another bean:
 ```xml
-    <bean depends-on="init" id="initializer-dependent" class="spring.core.bean.depends.on.InitializerDependent" />
-    <bean id="init" class="spring.core.bean.depends.on.Initializer" />
+    <bean depends-on="init" id="initializer-dependent" class="studying.spring.core.bean.depends.on.InitializerDependent" />
+    <bean id="init" class="studying.spring.core.bean.depends.on.Initializer" />
 ```
 Later we get the "dependent" bean from IoC container: 
 
@@ -335,8 +335,8 @@ public class InitializerMain {
 ```
 And we see in stdout that both beans was loaded: 
 ```shell script
-class spring.core.bean.depends.on.Initializer was initialized.
-class spring.core.bean.depends.on.InitializerDependent was initialized.
+class Initializer was initialized.
+class InitializerDependent was initialized.
 ```
 
 ## Lazy Initialization
@@ -347,7 +347,7 @@ beans, even if we not use it.
 - For lazy loading initialization we need to set `lazy-init=true` in bean properties
 
 ```xml
-<bean id="lazy-initialized" lazy-init="true" class="spring.core.bean.lazy.inicialization.LazyInitializedBean">
+<bean id="lazy-initialized" lazy-init="true" class="studying.spring.core.bean.lazy.inicialization.LazyInitializedBean">
     <constructor-arg name="helloPhrase" value="This bean was initialized lazily" />
 </bean>
 ```
@@ -406,13 +406,19 @@ that dependency can be satisfied automactically without a need to modify the con
 ## Autowiring modes
 
 | **Mode**     | **Explanation**  |
-| ------------ | ------------- |
-|  no          | (Default) No autowiring. Bean references must be defined by `ref` elements. Changing the default setting is not recommended for larger deployments, because specifying collaboratores explicitly gives greater control and clarity. To some extent, it documents the structure of a system |
+| ------------ | ---------------- |
+|  no          | (Default) No autowiring. Bean references must be defined by `ref` elements. Changing the default setting is not recommended for larger deployments, because specifying collaboratore explicitly gives greater control and clarity. To some extent, it documents the structure of a system |
 |  byName      | Autowiring by property name. Spring looks for a bean with the same name as the property that needs to be autowired. For example, if a bean definition is set to autowire by name and it contains a `master` property (that is, it has a `setMaster(...)` method), Spring looks for a bean definition named `master` and uses it to set the property |
 |  byType      | Lets a property be autowired if exactly one bean of the property type exists in the container. If more than one exists a fatal exception is thrown, which indicates that you may not use `byType` autowiring for that bean. If there are no matching beans, nothing happens (the property is not set).
-|  constructor  | Analogous to `byType` but applies to constructor arguments. if there is not exactly one bean of the constructor argument type in the container, a fatal error is raised |
+|  constructor | Analogous to `byType` but applies to constructor arguments. if there is not exactly one bean of the constructor argument type in the container, a fatal error is raised |
 
 
+## Autowiring Demo
+
+# no (No autowiring)
+
+We will not get our beans automatically wired each other if we don't explicit their 
+references with `ref` bean attribute. So, we have to do the relationship ourselves as in this example:
 
 
 

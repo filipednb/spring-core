@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean depends-on="init" id="initializer-dependent" class="spring.core.bean.depends.on.InitializerDependent" />
-    <bean id="init" class="spring.core.bean.depends.on.Initializer" />
+    <bean depends-on="init" id="initializer-dependent" class="studying.spring.core.bean.depends.on.InitializerDependent" />
+    <bean id="init" class="studying.spring.core.bean.depends.on.Initializer" />
 
 </beans>

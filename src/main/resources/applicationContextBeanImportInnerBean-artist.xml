@@ -6,10 +6,10 @@
 
     <import resource="applicationContextBeanImport-instrument.xml" />
 
-    <bean id="artist" class="spring.core.bean.imports.Artist">
+    <bean id="artist" class="studying.spring.core.bean.imports.Artist">
         <property name="name" value="Jhonny Boy" />
         <property name="instrument">
-            <bean class="spring.core.bean.imports.Instrument">
+            <bean class="studying.spring.core.bean.imports.Instrument">
                 <property name="id" value="88" />
                 <property name="name" value="Eletric Piano" />
             </bean>

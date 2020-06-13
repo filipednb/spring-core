@@ -3,12 +3,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="user" class="spring.core.bean.circular.dependency.example.User">
+    <bean id="user" class="studying.spring.core.bean.circular.dependency.User">
         <constructor-arg name="address" ref="address" />
     </bean>
 
 
-    <bean id="address" class="spring.core.bean.circular.dependency.example.Address">
+    <bean id="address" class="studying.spring.core.bean.circular.dependency.Address">
         <constructor-arg name="user" ref="user" />
     </bean>
 

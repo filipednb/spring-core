@@ -4,14 +4,14 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="details" abstract="true" class="spring.core.collections.merging.Details">
+    <bean id="details" abstract="true" class="studying.spring.core.collections.merging.Details">
         <property name="details">
             <props>
                 <prop key="email1">admin@admin.com</prop>
             </props>
         </property>
     </bean>
-    <bean id="userDetails" parent="details" class="spring.core.collections.merging.UserDetails">
+    <bean id="userDetails" parent="details" class="studying.spring.core.collections.merging.UserDetails">
         <property name="details">
             <props merge="true">
                 <prop key="email2">admin2@admin2.com</prop>

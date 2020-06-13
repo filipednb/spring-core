@@ -6,7 +6,7 @@
 
     <import resource="applicationContextBeanImport-instrument.xml" />
 
-    <bean id="artist" class="spring.core.bean.imports.Artist">
+    <bean id="artist" class="studying.spring.core.bean.imports.Artist">
         <property name="name" value="Jhonny Boy" />
         <property name="instrument" ref="instrument" />
     </bean>

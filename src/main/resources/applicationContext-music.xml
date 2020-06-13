@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="music" class="spring.core.application.context.multiple.xmls.Music">
+    <bean id="music" class="studying.spring.core.application.context.multiple.xmls.Music">
         <constructor-arg name="name" value="Scar Tissue" />
         <constructor-arg name="musician" value="Jhonny Peps" />
     </bean>

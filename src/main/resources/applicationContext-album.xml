@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="album" class="spring.core.application.context.multiple.xmls.Album">
+    <bean id="album" class="studying.spring.core.application.context.multiple.xmls.Album">
         <property name="name" value="Music is the religion" />
     </bean>
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user" class="studying.spring.core.autowire.no.User">
+        <property name="id" value="1" />
+        <property name="name" value="Sebastian Doe" />
+        <property name="address" ref="address" />
+    </bean>
+
+    <bean id="address" class="studying.spring.core.autowire.no.Address">
+        <property name="number" value="1218" />
+        <property name="street" value="Fort Lauderdale St" />
+        <property name="country" value="Tuwalu" />
+    </bean>
+</beans>

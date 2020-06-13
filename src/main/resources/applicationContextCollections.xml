@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="collection" class="spring.core.collections.CollectionHolder">
+    <bean id="collection" class="studying.spring.core.collections.CollectionHolder">
         <property name="myList">
             <list>
                 <value>List 1</value>
@@ -39,15 +39,15 @@
             </props>
         </property>
     </bean>
-    <bean id="player1" class="spring.core.collections.Player">
+    <bean id="player1" class="studying.spring.core.collections.Player">
         <property name="id" value="1" />
         <property name="name" value="Filipe Player" />
     </bean>
-    <bean id="player2" class="spring.core.collections.Player">
+    <bean id="player2" class="studying.spring.core.collections.Player">
         <constructor-arg name="id" value="2" />
         <constructor-arg name="name" value="Jhonny Player" />
     </bean>
-    <bean id="player3" class="spring.core.collections.Player">
+    <bean id="player3" class="studying.spring.core.collections.Player">
         <constructor-arg name="id" value="3" />
         <constructor-arg name="name" value="Bastião Player" />
     </bean>
