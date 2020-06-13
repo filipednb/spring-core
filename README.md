@@ -13,6 +13,7 @@ Also, we can define Spring as:
 “Spring framework is a Java platform that provides comprehensive infrastructure support for developing Java applications. Spring handles the infrastructure so you can focus on your application” 
 
 In [this repository](https://github.com/filipednb/spring-core.git), we will focus to undertand how **Spring Core Container** works.
+Each example will have a package that contains a main class that you can run to see it working.
 
 ## Introducing objects dependencies
 
@@ -83,6 +84,7 @@ In short, the `BeanFactory` provides the configuration framework and basic funct
 There is two different ways of configuring a bean:
 
 **Configuration Metadata - XML File**
+`studying.spring.core.xml.config`
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -106,6 +108,7 @@ There is two different ways of configuring a bean:
 ```
 
 **Configuration Metadata - Java Config**
+`studying.spring.core.java.annotation.config`
 
 ```java
 package spring.core.java.annotation.config;
@@ -136,8 +139,6 @@ In annotation configuration of a bean the method name will be the name of the be
 ```
 ## BeanFactory Interface
 
-
-
 *   Spring’s Dependency Injection functionality is implemented using this BeanFactory interface and its subinterfaces.
 *   This is the root interface for accessing a Spring bean container
 *   This is the basic client view of a bean container
@@ -167,8 +168,6 @@ Setter injection should primarily only be used for optional dependencies that ca
 
 **Dependency Resolution Process**
 
-
-
 *   The ApplicationContext is created and initialized with configuration metadata
 *   For each bean, its dependencies are expressed in the form of properties, constructor arguments or arguments to the static-factory method
 *   Each property or constructor argument that is a value is converted from its specified format to the actual type of that property or constructor argument
@@ -182,6 +181,7 @@ Setter injection should primarily only be used for optional dependencies that ca
 
 
 **Importing XML Configurations**
+`studying.spring.core.bean.imports`
 
 ![drawing](src/main/resources/assets/importingXmlTree.png)
 
@@ -237,6 +237,7 @@ Another way of declaring a dependency bean inside another is defining a `<bean /
 </bean>
 ```
 **Handling Java Collections**
+`studying.spring.core.collections`
 
 We can populate sets, lists and maps by creating a application context XML configuration like below:
 
@@ -298,6 +299,7 @@ We can populate sets, lists and maps by creating a application context XML confi
 ```
 
 **Merging Collections**
+`studying.spring.core.collections.merging`
 
 Spring can deal with merging similar collections of two classes. An example is, if we have a **Abstract Class A** and another **Class B** that extends from it and both have similar properties then Spring will merge those properties.
 We need to declare child property->props with the attribute `merge=true`. 
@@ -326,6 +328,8 @@ We need to declare child property->props with the attribute `merge=true`.
 </beans>
 ```
 ## Depends On
+`studying.spring.core.bean.depends.on`
+
 - At times, we want to force the container to load one or more bean 
 before the dependent bean is loaded
 - With depends-on, Spring IoC initializes depending beans before craeating the actual bean
@@ -353,6 +357,7 @@ class InitializerDependent was initialized.
 ```
 
 ## Lazy Initialization
+`studying.spring.core.bean.lazy.inicialization`
 
 - By default Spring loads bean with eager initialization, Spring IoC container will load all 
 beans, even if we not use it.
@@ -365,8 +370,8 @@ beans, even if we not use it.
 </bean>
 ```
 
-
 ## Loading Multiple XML files in same container
+`studying.spring.core.application.context.multiple.xmls`
 
 We can load multiple config files by passing it to ClassPathXmlApplicationContext constructor, like this:
 
@@ -383,6 +388,7 @@ public class AlbumMain {
 ```
 
 ## FileSystemXmlApplicationContext
+`studying.spring.core.application.context.from.file.system`
 
 We can use an external Xml config file by passing its absolute path to FileSystemXmlApplicationContext constructor:
 
@@ -429,6 +435,7 @@ that dependency can be satisfied automactically without a need to modify the con
 ## Autowiring Demo
 
 # no (No autowiring)
+`studying.spring.core.autowire.no`
 
 We will not get our beans automatically wired each other if we don't explicit their 
 references with `ref` attribute. So, we have to do the relationship ourselves as in this example:
@@ -448,6 +455,7 @@ references with `ref` attribute. So, we have to do the relationship ourselves as
 ```
 
 # byName
+`studying.spring.core.autowire.by.name`
 
 With `autowire="byName"` attribute Spring will look for a available bean to replace the
 property of dependent class, the configuration should be like in this example:
@@ -473,6 +481,7 @@ main we can see that Spring replace the User.address with an the bean `address`
 User{id=1, name='Sebastian Doe', address=Address{number='1218', street='Fort Lauderdale St', country='Tuwalu'}}
 ```
 # byType
+`studying.spring.core.autowire.by.type`
 
 It have the same behavior of `byName` way, but will look by a bean of the same type.
 
@@ -493,6 +502,7 @@ Now, the bean id is not important but if we have more than one beans of same typ
 `UnsatisfiedDependencyException ... expected single matching bean but found 2: ...` 
 
 # constructor
+`studying.spring.core.autowire.by.constructor`
 
 Spring will inject the correct dependency if we specify in the class constructor the bean that we want, we just 
 need to define `autowire="constructor"` like so:
