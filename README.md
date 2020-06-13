@@ -12,6 +12,8 @@ Also, we can define Spring as:
 
 “Spring framework is a Java platform that provides comprehensive infrastructure support for developing Java applications. Spring handles the infrastructure so you can focus on your application” 
 
+In [this repository](https://github.com/filipednb/spring-core.git), we will focus to undertand how **Spring Core Container** works.
+
 ## Introducing objects dependencies
 
 A Java Application is a collection of Objects. In a good application we will have several objects with their own responsibilities. And those objects can be dependent on each other.
