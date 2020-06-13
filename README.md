@@ -1,6 +1,15 @@
 
 # Spring Overview
 
+The Spring Framework consists of features organized into about 20 modules. 
+These modules are grouped into **Core Container**, **Data Access/Integration**, **Web**, 
+**AOP** (Aspect Oriented Programming), **Instrumentation**, **Messaging**, and **Test**, 
+as shown in the following diagram.
+
+![drawing](src/main/resources/assets/springOverview.png)
+
+Also, we can define Spring as:
+
 “Spring framework is a Java platform that provides comprehensive infrastructure support for developing Java applications. Spring handles the infrastructure so you can focus on your application” 
 
 ## Introducing objects dependencies
@@ -547,10 +556,10 @@ exception `NoSuchBeanDefinitionException`
 
 - Confusing Nature: If you have lot of dependency in a program, then it’s hard to find using autowire attribute of bean.
  
+ # Java Based Configuration
  
  
- 
-----------------------------------------
+---
 
 There are three ways of dependency injection that will be managed by Spring IoC container.
 
