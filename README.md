@@ -581,7 +581,7 @@ exception `NoSuchBeanDefinitionException`
  `studying.spring.core.java.annotation.configuration`
  
  In this example we will use a java class annotated with `@Configuration` having a method annotated 
- with `@Bean` that returns a new instance of Product. And its
+ with `@Bean` that returns a new instance of Product. 
  
  ```java
 package studying.spring.core.java.annotation.configuration;
@@ -606,6 +606,31 @@ As you can see in `studying.spring.core.java.annotation.configuration.ProductMai
  a ApplicationContext object of another extension/implementation called `AnnotationConfigApplicationContext` 
  that is in charge to read java configuration files and delegating the creation of beans. 
  
+ ## @Autowired
+ `studying.spring.core.java.annotation.autowired`
+ 
+ First of all we will write a Java configuration class called `UserConfiguration`, this class is
+ annotated with `@Configuration` and have two methods that returns UserRepository and UserService new objects 
+ both methods annotated with `@Bean` showing to Spring how to create those objects.
+  As you can see in `studying.spring.core.java.annotation.autowired.UserService` we defined a UserRepository
+ with @Autowire annotation. So Spring IoC container will be in charge to instantiate and give 
+ this object for us, ready to be used, and remember that we didn't wrote any XML configuration file.
+ 
+ If you inspect @Autowired @interface you will see that it can receive an argument: `required` and by default 
+ it is set to `true`, it says that is mandatory that exist a bean of this type in container. Go ahead, comment 
+ the @Bean annotation in UserConfiguration in the method that returns UserRepository and note that Spring
+ will thrown a "NoSuchBeanDefinitionException" if you execute the main method in 
+ `studying.spring.core.java.annotation.autowired.UserMain`.
+  
+ ### Autowiring collections of beans
+ `studying.spring.core.java.annotation.autowired.collection`
+ 
+ Spring will be able to auto wire a collection of beans if we provide a Configuration with multiple @Bean methods.
+  
+  Is possible to recovery the bean name, that is the name of method inside configuration file. If we iterate over the
+  product list receiving the values inside a `Map<String, Product>`.
+  
+  ## @Primary
  
 ---
 
