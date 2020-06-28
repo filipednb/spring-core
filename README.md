@@ -607,30 +607,70 @@ As you can see in `studying.spring.core.java.annotation.configuration.ProductMai
  that is in charge to read java configuration files and delegating the creation of beans. 
  
  ## @Autowired
- `studying.spring.core.java.annotation.autowired`
+`studying.spring.core.java.annotation.autowired`
+
+First of all we will write a Java configuration class called `UserConfiguration`, this class is
+annotated with `@Configuration` and have two methods that returns UserRepository and UserService new objects 
+both methods annotated with `@Bean` showing to Spring how to create those objects.
+As you can see in `UserService` we defined a UserRepository
+with @Autowire annotation. So Spring IoC container will be in charge to instantiate and give 
+this object for us, ready to be used, and remember that we didn't wrote any XML configuration file.
+
+If you inspect @Autowired @interface you will see that it can receive an argument: `required` and by default 
+it is set to `true`, it says that is mandatory that exist a bean of this type in container. Go ahead, comment 
+the @Bean annotation in UserConfiguration in the method that returns UserRepository and note that Spring
+will thrown a "NoSuchBeanDefinitionException" if you execute the main method in 
+`UserMain`.
+
+### Autowiring collections of beans
+`studying.spring.core.java.annotation.autowired.collection`
+
+Spring will be able to auto wire a collection of beans if we provide a Configuration with multiple @Bean methods.
+
+Is possible to recovery the bean name, that is the name of method inside configuration file. If we iterate over the
+product list receiving the values inside a `Map<String, Product>`.
+
+## @Primary `studying.spring.core.java.annotation.autowired.primary`
+
+The @Primary annotation will decide which bean spring IoC will provide when two or more beans of same type collides.
+In this example the Person class have a autowired vehicle inside, so it could drive a Car vehicle, a Bike vehicle or a MotorCyle vehicle. Here we have the 
+three vehicles available so Spring will thrown a `NoUniqueBeanDefinitionException` like this:
+```shell script
+Exception in thread "main" org.springframework.beans.factory.UnsatisfiedDependencyException: 
+Error creating bean with name 'person': Unsatisfied dependency expressed through field 'vehicle'; 
+nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: 
+No qualifying bean of type 'studying.spring.core.java.annotation.autowired.primary.Vehicle' available: 
+expected single matching bean but found 3: motorCycle,bike,car
+```
+We can resolve this conflict defining which bean is the priority telling to Spring which bean to use
+ annotating any Vehicle type bean with `@Primary`.
  
- First of all we will write a Java configuration class called `UserConfiguration`, this class is
- annotated with `@Configuration` and have two methods that returns UserRepository and UserService new objects 
- both methods annotated with `@Bean` showing to Spring how to create those objects.
-  As you can see in `studying.spring.core.java.annotation.autowired.UserService` we defined a UserRepository
- with @Autowire annotation. So Spring IoC container will be in charge to instantiate and give 
- this object for us, ready to be used, and remember that we didn't wrote any XML configuration file.
+## @Qualifier `studying.spring.core.java.annotation.autowired.qualifier`
+
+Same scenario that we saw in `@Primary` example, spring will throw an NonUniquBeanDefinitionException because 
+it cannot decide which Vehicle will inject into Person bean. Another way to resolve this is annotating the autowired Vehicle
+with a @Qualifier passing the name of the bean to use.
+
+```java
+public class Person {
+
+    @Autowired
+    @Qualifier("bike")
+    private Vehicle vehicle;
+
+    public void driveVehicle() {
+        vehicle.drive();
+    }
+
+}
+```
+
+ Executing the main class we'll see this output:
+ ```shell script
+Driving the Bike -> studying.spring.core.java.annotation.autowired.qualifier.Bike
+```
  
- If you inspect @Autowired @interface you will see that it can receive an argument: `required` and by default 
- it is set to `true`, it says that is mandatory that exist a bean of this type in container. Go ahead, comment 
- the @Bean annotation in UserConfiguration in the method that returns UserRepository and note that Spring
- will thrown a "NoSuchBeanDefinitionException" if you execute the main method in 
- `studying.spring.core.java.annotation.autowired.UserMain`.
-  
- ### Autowiring collections of beans
- `studying.spring.core.java.annotation.autowired.collection`
  
- Spring will be able to auto wire a collection of beans if we provide a Configuration with multiple @Bean methods.
-  
-  Is possible to recovery the bean name, that is the name of method inside configuration file. If we iterate over the
-  product list receiving the values inside a `Map<String, Product>`.
-  
-  ## @Primary
  
 ---
 

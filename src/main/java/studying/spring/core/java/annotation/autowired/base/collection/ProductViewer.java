@@ -1,9 +1,8 @@
-package studying.spring.core.java.annotation.autowired.collection;
+package studying.spring.core.java.annotation.autowired.base.collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
-import java.util.Set;
 
 public class ProductViewer {
 

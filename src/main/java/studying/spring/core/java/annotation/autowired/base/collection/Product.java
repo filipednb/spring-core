@@ -1,9 +1,9 @@
-package studying.spring.core.java.annotation.autowired.collection;
+package studying.spring.core.java.annotation.autowired.base.collection;
 
 public class Product {
 
-    private String id;
-    private String description;
+    private final String id;
+    private final String description;
 
     public Product(String id, String description) {
         this.id = id;

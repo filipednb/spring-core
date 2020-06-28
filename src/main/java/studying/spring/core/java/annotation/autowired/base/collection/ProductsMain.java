@@ -1,4 +1,4 @@
-package studying.spring.core.java.annotation.autowired.collection;
+package studying.spring.core.java.annotation.autowired.base.collection;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

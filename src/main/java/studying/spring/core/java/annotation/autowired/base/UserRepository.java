@@ -1,4 +1,4 @@
-package studying.spring.core.java.annotation.autowired;
+package studying.spring.core.java.annotation.autowired.base;
 
 public class UserRepository {
 
