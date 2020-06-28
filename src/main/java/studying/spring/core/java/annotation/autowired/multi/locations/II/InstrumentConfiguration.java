@@ -1,4 +1,4 @@
-package studying.spring.core.java.annotation.autowired.multi.locations.I;
+package studying.spring.core.java.annotation.autowired.multi.locations.II;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

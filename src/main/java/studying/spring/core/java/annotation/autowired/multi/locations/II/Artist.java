@@ -1,4 +1,4 @@
-package studying.spring.core.java.annotation.autowired.multi.locations.I;
+package studying.spring.core.java.annotation.autowired.multi.locations.II;
 
 public class Artist {
 

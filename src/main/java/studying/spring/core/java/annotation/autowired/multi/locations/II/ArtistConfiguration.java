@@ -1,10 +1,12 @@
-package studying.spring.core.java.annotation.autowired.multi.locations.I;
+package studying.spring.core.java.annotation.autowired.multi.locations.II;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 @Configuration
+@Import(InstrumentConfiguration.class)
 public class ArtistConfiguration {
 
     @Value("#{instrument}")

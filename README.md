@@ -670,8 +670,75 @@ public class Person {
 Driving the Bike -> studying.spring.core.java.annotation.autowired.qualifier.Bike
 ```
  
+ ## Loading Beans from multiple Locations `studying.spring.core.java.annotation.autowired.multi.locations`
  
+ In our examples is quite of easy to manage all beans configurations in a single file, but in enterprise application 
+ it is harder because we'll have a lot of beans. 
+  In this section we'll see how to segragate those configuration files.
+  We can get the solution of this problem in two ways.
  
+ First: Our main class will define the main method creating a new ApplicationContext with two configuration files:
+ `studying.spring.core.java.annotation.autowired.multi.locations`
+ 
+ ```java
+ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
+        ArtistConfiguration.class,
+        InstrumentConfiguration.class);
+
+```
+ The problem is that ArtistConfiguration needs a `Instrument` bean to pass to `Artist` bean instantiation, and Instrument bean
+ was defined in other file, the first way to resolve this is annotating the Instrument object inside `ArtistConfiguration` with @Value.
+ 
+ ```java
+@Configuration
+public class ArtistConfiguration {
+
+    @Value("#{instrument}")
+    private Instrument instrument;
+
+    @Bean
+    public Artist artist() {
+        return new Artist(instrument);
+    }
+
+}
+```
+Note that we used SpEL [(Spring Expression Language)](https://docs.spring.io/spring/docs/4.3.10.RELEASE/spring-framework-reference/html/expressions.html)
+to define the value of instrument object.
+
+Second way: `studying.spring.core.java.annotation.autowired.multi.locations.II`
+ 
+ In this time our ApplicationContext will receive a AnnotationConfigApplicationContext instance that will
+  receive only the `ArtistConfiguration.class`. 
+
+```java
+    public static void main(String[] args) {
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ArtistConfiguration.class);
+        System.out.println(applicationContext.getBean(Artist.class));
+    }
+```
+
+And the ArtistConfiguration class will be in charge to import the instrument configuration
+ using the `@Import` annotation, like this:
+
+```java
+@Configuration
+@Import(InstrumentConfiguration.class)
+public class ArtistConfiguration {
+
+    @Value("#{instrument}")
+    private Instrument instrument;
+
+    @Bean
+    public Artist artist() {
+        return new Artist(instrument);
+    }
+
+}
+```
+ 
+ @B
+
 ---
 
 There are three ways of dependency injection that will be managed by Spring IoC container.
